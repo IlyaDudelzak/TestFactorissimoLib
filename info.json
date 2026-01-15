@@ -1,13 +1,14 @@
 {
-  "name": "[internal-mod-name]",
+  "name": "TestFactorissimoLib",
   "version": "0.0.0",
-  "title": "[MOD DISPLAY NAME]",
-  "author": "[YOUR MODS.FACTORIO.COM USERNAME]",
-  "homepage": "[HOMEPAGE/REPO URL]",
-  "description": "[SHORT DESCRIPTION]",
+  "title": "Factorissimo Library Test Mod",
+  "author": "IlyaDudelzak",
+  "homepage": "https://github.com/IlyaDudelzak/TestFactorissimoLib",
+  "description": "A test mod for the Factorissimo library.",
   "factorio_version": "2.0",
   "dependencies": [
-    "base"
+    "base",
+    "FactorissimoLib"
   ],
   "quality_required": false,
   "rail_bridges_required": false,
