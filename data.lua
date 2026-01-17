@@ -1,3 +1,5 @@
+local F = "__TestFactorissimoLib__"
+
 local FactoryLib = require("__FactorissimoLib__/remote-prototype-api.lua")
 
 FactoryLib.add_factory{
@@ -8,7 +10,7 @@ FactoryLib.add_factory{
     outside_size = 8,
     inside_size = 30,
     max_health = 4000,
-    color = {r = 0.8, g = 0.7, b = 0.55},
+    color = {r = 200, g = 100, b = 40},
     graphics = {
         icon = F .. "/graphics/icon/factory-1.png",
         icon_size = 64,
@@ -42,19 +44,6 @@ FactoryLib.add_factory{
             {type = "item", name = "copper-plate", amount = 200}
         },
     },
-    recipe_alternatives = {
-        {
-            recipe = {
-                energy_required = 30,
-                ingredients = {
-                    {type = "item", name = "stone",        amount = 500},
-                    {type = "item", name = "iron-plate",   amount = 500},
-                    {type = "item", name = "copper-plate", amount = 200}
-                },
-            },
-            condition = "space-age"
-        }
-    },
     technology = {
         name = "factory-architecture-t1",
         icon = F .. "/graphics/technology/factory-architecture-1.png",
@@ -63,22 +52,34 @@ FactoryLib.add_factory{
         time = 30,
         count = 100,
         ingredients = {{"automation-science-pack", 1}},
-    },
-    technology_alternatives = {
-        {
-            technology = {
-                name = "factory-architecture-t1",
-                icon = F .. "/graphics/technology/factory-architecture-1.png",
-                icon_size = 256,
-                prerequisites = {"stone-wall", "logistics"},
-                time = 30,
-                count = 100,
-                ingredients = {{"automation-science-pack", 1}},
-            },
-            condition = "space-age"
-        }
-    },
-    
+    },    
     pattern = "01",
     connections_per_side = 4,
 }
+
+local space_age_patch_data = {
+    recipe = {
+        energy_required = 30,
+        ingredients = {
+            {type = "item", name = "stone",        amount = 500},
+            {type = "item", name = "iron-plate",   amount = 500},
+            {type = "item", name = "copper-plate", amount = 200}
+        },
+    },
+    technology = {
+        name = "factory-architecture-t1",
+        icon = F .. "/graphics/technology/factory-architecture-1.png",
+        icon_size = 256,
+        prerequisites = {"stone-wall", "logistics"},
+        time = 30,
+        count = 100,
+        ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}},
+    },
+}
+
+FactoryLib.alternatives.add_patch(
+    "factory-data-factory-1", 
+    space_age_patch_data, 
+    "mod",          -- Тип условия
+    {"space-age"}  -- Аргументы (имя мода)
+)
