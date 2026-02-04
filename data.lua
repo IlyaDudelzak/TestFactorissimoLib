@@ -54,7 +54,13 @@ FactoryLib.add_factory{
         ingredients = {{"automation-science-pack", 1}},
     },    
     pattern = "01",
-    connections_per_side = 4,
+    connections = {
+        handler = "manual",
+    },
+    door = {
+        side = "s",
+        size = 2
+    }
 }
 
 FactoryLib.add_factory{
