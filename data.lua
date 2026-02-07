@@ -2,6 +2,8 @@ local F = "__TestFactorissimoLib__"
 
 local FactoryLib = require("__FactorissimoLib__/remote-prototype-api.lua")
 
+local pf = "p-q-"
+
 FactoryLib.add_factory{
     type = "factory",
     name = "factory-1",
@@ -55,7 +57,11 @@ FactoryLib.add_factory{
     },    
     pattern = "01",
     connections = {
-        handler = "manual",
+        handler = "manual_side",
+        connections = {
+            {2, 6},
+            {3, 10},
+        }
     },
     door = {
         side = "s",
@@ -115,7 +121,17 @@ FactoryLib.add_factory{
         ingredients = {{"automation-science-pack", 1}},
     },    
     pattern = "01",
-    connections_per_side = 4,
+    connections = {
+        handler = "manual_side",
+        connections = {
+            {2, 6},
+            {3, 10},
+        }
+    },
+    door = {
+        side = {"n", "s", "e", "w"},
+        size = 2
+    }
 }
 
 local space_age_patch_data = {
@@ -144,3 +160,32 @@ FactoryLib.alternatives.add_patch(
     "mod",          -- Тип условия
     {"space-age"}  -- Аргументы (имя мода)
 )
+
+data:extend {{
+    type = "technology",
+    name = "factory-architecture-t2",
+    icon = F .. "/graphics/technology/factory-architecture-2.png",
+    icon_size = 256,
+    prerequisites = {"factory-architecture-t1", "steel-processing", "electric-energy-distribution-1"},
+    -- effects = {},
+    unit = {
+        count = 600,
+        ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}},
+        time = 45
+    },
+    order = pf .. "a-b",
+}}
+data:extend {{
+    type = "technology",
+    name = "factory-architecture-t3",
+    icon = F .. "/graphics/technology/factory-architecture-3.png",
+    icon_size = 256,
+    prerequisites = {"factory-architecture-t2", "concrete", "electric-energy-distribution-2", "production-science-pack"},
+    -- effects = {},
+    unit = {
+        count = 2000,
+        ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}, {"production-science-pack", 1}},
+        time = 60
+    },
+    order = pf .. "a-c",
+}}
